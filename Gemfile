@@ -16,4 +16,5 @@ gem 'uglifier'
 group :development, :test do
   gem 'guard-rspec'
   gem 'rspec-rails'
+  gem 'rubocop', require: false
 end
