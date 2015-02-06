@@ -14,6 +14,7 @@ gem 'turbolinks'
 gem 'uglifier'
 
 group :development, :test do
+  gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'rubocop', require: false
