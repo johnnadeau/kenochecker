@@ -3,5 +3,10 @@ class Result < ActiveRecord::Base
   belongs_to :ticket
 
   validates_presence_of :game, :ticket
-  validates :amount, numericality: { greater_than_or_equal_to: 0.00 }
+
+  def amount
+    spots = ticket.numbers.count
+    matches = (ticket.numbers & game.numbers).count
+    ticket.bet_amount * PRIZES[spots][matches]
+  end
 end

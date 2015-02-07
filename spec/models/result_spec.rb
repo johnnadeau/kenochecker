@@ -16,10 +16,12 @@ RSpec.describe Result, type: :model do
     expect(result).to be_invalid
   end
 
-  it 'is invalid if the amount is negative or missing' do
-    result = FactoryGirl.build_stubbed(:result, amount: -2.00)
-    expect(result).to be_invalid
-    result.amount = nil
-    expect(result).to be_invalid
+  it 'calculates the prize amount' do
+    game = FactoryGirl.build_stubbed(:game, numbers: (1..20).to_a, bonus: 1)
+    ticket = FactoryGirl.build_stubbed(:ticket, bet_amount: 2, games: [game], numbers: [1, 3, 4, 21])
+    result = FactoryGirl.build_stubbed(:result, game: game, ticket: ticket)
+    # ticket with 3/4 numbers matched, bet_amount of 2, and no bonus
+    # 3/4 pays 4 times the bet_amount 2 to equal 8
+    expect(result.amount).to eql(8)
   end
 end
