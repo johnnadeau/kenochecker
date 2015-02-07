@@ -1,0 +1,19 @@
+# inherit_from: .rubocop_todo.yml
+
+LineLength:
+  Max: 100
+
+Style/Documentation:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/*'
+    - 'spec/**/*'
+    - 'Guardfile'
+    - 'Rakefile'

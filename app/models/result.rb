@@ -2,7 +2,8 @@ class Result < ActiveRecord::Base
   belongs_to :game
   belongs_to :ticket
 
-  validates_presence_of :game, :ticket
+  validates :game, presence: true
+  validates :ticket, presence: true
 
   def prize_amount
     spots = ticket.numbers.count

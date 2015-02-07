@@ -8,7 +8,8 @@ class Game < ActiveRecord::Base
   has_many :tickets, through: :results
   has_many :results
 
-  validates_presence_of :game_number, :game_date
+  validates :game_number, presence: true
+  validates :game_date, presence: true
   validates :numbers, length: { is: NUMBER_COUNT }, unique_array: true,
                       inclusive_array: { range: VALID_NUMBERS }
   validates :bonus, inclusion: { in: VALID_BONUS_MULTIPLIERS }

@@ -14,9 +14,9 @@ class Ticket < ActiveRecord::Base
 
   def total_prize_amount
     if bonus?
-      results.to_a.sum { |r| r.prize_amount_with_bonus }
+      results.to_a.sum(&:prize_amount_with_bonus)
     else
-      results.to_a.sum { |r| r.prize_amount }
+      results.to_a.sum(&:prize_amount)
     end
   end
 end
