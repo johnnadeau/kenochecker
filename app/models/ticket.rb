@@ -5,7 +5,7 @@ class Ticket < ActiveRecord::Base
 
   serialize :numbers, Array
 
-  has_and_belongs_to_many :games
+  has_many :games, through: :results
   has_many :results
 
   validates :numbers, length: { in: NUMBER_RANGE }, unique_array: true,

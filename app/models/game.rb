@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
 
   serialize :numbers, Array
 
-  has_and_belongs_to_many :tickets
+  has_many :tickets, through: :results
   has_many :results
 
   validates_presence_of :game_number, :game_date
