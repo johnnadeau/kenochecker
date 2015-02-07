@@ -36,4 +36,32 @@ RSpec.describe Ticket, type: :model do
     ticket.numbers[0] = ticket.numbers[1] = 1
     expect(ticket).to be_invalid
   end
+
+  it 'calculates the total prize amount' do
+    game = FactoryGirl.build_stubbed(:game, numbers: (1..20).to_a, 
+                                     game_number: 123, bonus: 1)
+    game_1 = FactoryGirl.build_stubbed(:game, numbers: (5..25).to_a,
+                                       game_number: 124, bonus: 1)
+    ticket = FactoryGirl.build_stubbed(:ticket, bet_amount: 1, bonus: false,
+                                       numbers: [1, 2, 5, 23], games: [game, game_1])
+    result = FactoryGirl.build_stubbed(:result, ticket: ticket, game: game)
+    result_1 = FactoryGirl.build_stubbed(:result, ticket: ticket, game: game_1)
+    # game 0 has 3/4 matched numbers for 4
+    # game 1 has 2/4 matched numbers for 1
+    expect(ticket.total_prize_amount).to eql(5)
+  end
+
+  it 'calculates the total prize amount with bonus' do
+    game = FactoryGirl.build_stubbed(:game, numbers: (1..20).to_a, 
+                                     game_number: 123, bonus: 10)
+    game_1 = FactoryGirl.build_stubbed(:game, numbers: (5..25).to_a,
+                                       game_number: 124, bonus: 1)
+    ticket = FactoryGirl.build_stubbed(:ticket, bet_amount: 1, bonus: true,
+                                       numbers: [1, 2, 5, 23], games: [game, game_1])
+    result = FactoryGirl.build_stubbed(:result, ticket: ticket, game: game)
+    result_1 = FactoryGirl.build_stubbed(:result, ticket: ticket, game: game_1)
+    # game 0 has 3/4 matched numbers for 4 * 10 bonus for 40
+    # game 1 has 2/4 matched numbers for 1
+    expect(ticket.total_prize_amount).to eql(41)
+  end
 end

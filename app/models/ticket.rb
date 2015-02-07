@@ -11,4 +11,12 @@ class Ticket < ActiveRecord::Base
   validates :numbers, length: { in: NUMBER_RANGE }, unique_array: true,
                       inclusive_array: { range: VALID_NUMBERS }
   validates :bet_amount, inclusion: { in: VALID_BET_AMOUNTS }
+
+  def total_prize_amount
+    if bonus?
+      results.to_a.sum { |r| r.prize_amount_with_bonus }
+    else
+      results.to_a.sum { |r| r.prize_amount }
+    end
+  end
 end
