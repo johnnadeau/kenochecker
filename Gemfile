@@ -19,3 +19,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop', require: false
 end
+
+group :test do
+  gem 'simplecov', require: false
+end
