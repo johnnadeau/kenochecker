@@ -6,6 +6,7 @@ class Game < ActiveRecord::Base
   serialize :numbers, Array
 
   has_and_belongs_to_many :tickets
+  has_many :results
 
   validates_presence_of :game_number, :game_date
   validates :numbers, length: { is: NUMBER_COUNT }, unique_array: true,
