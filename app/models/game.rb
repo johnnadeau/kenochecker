@@ -5,9 +5,10 @@ class Game < ActiveRecord::Base
 
   serialize :numbers, Array
 
+  has_and_belongs_to_many :tickets
+
   validates_presence_of :game_number, :game_date
   validates :numbers, length: { is: NUMBER_COUNT }, unique_array: true,
-    inclusive_array: { range: VALID_NUMBERS }
+                      inclusive_array: { range: VALID_NUMBERS }
   validates :bonus, inclusion: { in: VALID_BONUS_MULTIPLIERS }
-
 end
