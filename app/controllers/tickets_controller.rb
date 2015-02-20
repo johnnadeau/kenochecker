@@ -25,6 +25,8 @@ class TicketsController < ApplicationController
   end
 
   def numbers_to_array
-    params[:ticket][:numbers] = params[:ticket][:numbers].split(',').map(&:to_i)
+    if params[:ticket][:numbers]
+      params[:ticket][:numbers] = params[:ticket][:numbers].split(',').map(&:to_i)
+    end
   end
 end
