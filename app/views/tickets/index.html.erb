@@ -1,0 +1,10 @@
+<h1>Tickets</h1>
+<table>
+  <% @tickets.each do |ticket| %>
+    <tr>
+      <td><%= ticket.numbers.to_s %></td>
+      <td><%= number_to_currency(ticket.bet_amount) %></td>
+      <td><%= ticket.bonus %></td>
+    </tr>
+  <% end %>
+</table>
