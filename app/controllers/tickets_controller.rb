@@ -20,6 +20,7 @@ class TicketsController < ApplicationController
   end
 
   private
+
   def ticket_params
     params.require(:ticket).permit! # (:numbers, :bet_amount, :bonus)
   end
