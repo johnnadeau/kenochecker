@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
-
 ruby '2.2.0'
-
 gem 'rails', '4.2.0'
 
 gem 'sqlite3'
 
+gem 'devise'
+
 gem 'coffee-rails'
 gem 'jbuilder'
 gem 'jquery-rails'
+gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'turbolinks'
 gem 'uglifier'
