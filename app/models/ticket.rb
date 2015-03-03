@@ -3,6 +3,7 @@ class Ticket < ActiveRecord::Base
   VALID_NUMBERS = 1..80
   VALID_BET_AMOUNTS = [1, 2, 5, 10, 20]
 
+  attr_accessor :game_date, :game_number
   serialize :numbers, Array
 
   has_many :games, through: :results
