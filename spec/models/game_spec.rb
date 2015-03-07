@@ -47,4 +47,17 @@ RSpec.describe Game, type: :model do
     game = FactoryGirl.build_stubbed(:game, bonus: 2)
     expect(game).to be_invalid
   end
+
+  describe 'find by game number' do
+    it 'from the database' do
+      FactoryGirl.create(:game, game_number: 12345)
+      game = Game.find_by_game_number 12345
+      expect(game).not_to be_nil
+    end
+
+    it 'from api if not in the database' do
+      game = Game.find_by_game_number 1681255
+      expect(game).not_to be_nil
+    end
+  end
 end

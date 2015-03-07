@@ -7,6 +7,7 @@ gem 'sqlite3'
 gem 'devise'
 
 gem 'coffee-rails'
+gem 'httparty'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
