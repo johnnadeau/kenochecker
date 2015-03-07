@@ -13,27 +13,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :numbers %><br>
-    <%= f.text_field :numbers %>
+  <div class="form-group">
+    <%= f.text_field :numbers, placeholder: 'Numbers',
+      class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label 'Game Date' %><br>
-    <%= f.date_field :game_date %>
+  <div class="form-group">
+    <%= f.date_field :game_date, placeholder: 'Game Date',
+      class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label 'Game Number' %><br>
-    <%= f.text_field :game_number %>
+  <div class="form-group">
+    <%= f.text_field :game_number, placeholder: 'Game Number',
+      class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :bet_amount %><br>
-    <%= f.number_field :bet_amount %>
+  <div class="form-group">
+    <%= f.number_field :bet_amount, placeholder: 'Bet Amount',
+      class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :bonus %><br>
+  <div class="form-group">
     <%= f.check_box :bonus %>
+    <%= f.label 'Bonus?' %>
   </div>
-  <div class "actions">
-    <%= f.submit %>
+  <div class "form-group">
+    <%= f.submit "Submit", class: "btn btn-lg btn-success btn-block" %>
   </div>
 <% end %>
