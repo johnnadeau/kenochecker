@@ -1,6 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe TicketsController, type: :controller do
+RSpec.describe TicketsController do
+
+  before(:each) do
+    sign_in FactoryGirl.create(:user)
+  end
 
   describe "GET index" do
     it "returns http success" do

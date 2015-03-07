@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
   before_action :numbers_to_array, only: [:create]
 
   def index
-    @tickets = Ticket.all
+    @tickets = current_user.tickets
   end
 
   def new
@@ -10,7 +10,7 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new ticket_params
+    @ticket = current_user.tickets.build ticket_params
     if @ticket.save
       redirect_to tickets_path
     else

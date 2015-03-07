@@ -6,6 +6,7 @@ class Ticket < ActiveRecord::Base
   attr_accessor :game_date, :game_number
   serialize :numbers, Array
 
+  belongs_to :user
   has_many :games, through: :results
   has_many :results
 
