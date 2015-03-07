@@ -1,11 +1,21 @@
 <nav class="navbar navbar-default">
-<div class="conatiner-fluid">
-  <div class="navbar-header">
-    <%= link_to "KenoChecker", root_path, class: "navbar-brand" %>
-  </div>
-
-  <div class="collapse navbar-collapse">
-    <ul class="nav navbar-nav navbar-right">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button"
+      class="navbar-toggle collapsed"
+      data-toggle="collapse"
+      data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">
+        <p>Keno Checker</p>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
       <li><%= link_to "About", pages_about_path %></li>
       <% if user_signed_in? %>
         <li><%= current_user.email %></li>
@@ -13,7 +23,7 @@
       <% else %>
         <li><%= link_to "Log in", new_user_session_path %></li>
       <% end %>
-    </ul>
+      </ul>
+    </div>
   </div>
-</div>
 </nav>
