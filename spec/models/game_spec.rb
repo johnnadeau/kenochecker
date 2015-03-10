@@ -5,7 +5,7 @@ RSpec.describe Game, type: :model do
     game = FactoryGirl.build_stubbed(:game)
     expect(game).to be_valid
   end
-  
+
   it 'is invalid without exactly 20 numbers' do
     game = FactoryGirl.build_stubbed(:game)
     # too many numbers
@@ -18,7 +18,7 @@ RSpec.describe Game, type: :model do
     game.numbers = nil
     expect(game).to be_invalid
   end
-  
+
   it 'is invalid if any number is outside the number range (1..80)' do
     game = FactoryGirl.build_stubbed(:game)
     game.numbers[0] = -1
@@ -56,8 +56,11 @@ RSpec.describe Game, type: :model do
     end
 
     it 'from api if not in the database' do
-      game = Game.find_by_game_number 1681255
-      expect(game).not_to be_nil
+      VCR.use_cassette("find_game_by_game_number") do
+        game = Game.find_by_game_number 1682396
+        expect(game).not_to be_nil
+        expect(game.game_number).to eql(1682396)
+      end
     end
   end
 end

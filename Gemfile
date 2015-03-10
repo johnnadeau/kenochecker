@@ -20,8 +20,10 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'rubocop', require: false
+  gem 'vcr'
 end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'webmock'
 end
