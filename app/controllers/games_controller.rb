@@ -23,7 +23,7 @@ class GamesController < ApplicationController
   end
 
   def numbers_to_array
-    if params[:game][:numbers] 
+    if params[:game][:numbers]
       params[:game][:numbers] = params[:game][:numbers].split(',').map(&:to_i)
     end
   end

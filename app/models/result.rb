@@ -8,7 +8,11 @@ class Result < ActiveRecord::Base
   def prize_amount
     spots = ticket.numbers.count
     matches = (ticket.numbers & game.numbers).count
-    ticket.bet_amount * PRIZES[spots][matches]
+    if PRIZES[spots].key? matches
+      ticket.bet_amount * PRIZES[spots][matches]
+    else
+      0
+    end
   end
 
   def prize_amount_with_bonus
