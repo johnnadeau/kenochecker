@@ -32,4 +32,29 @@ RSpec.describe TicketsController do
       expect(response).to render_template(:new)
     end
   end
+
+  describe 'GET show' do
+    it 'displays a ticket' do
+      game = FactoryGirl.create(:game, game_number: 666)
+      ticket = FactoryGirl.create(:ticket, games: [game])
+      get :show, id: ticket
+      expect(assigns(:ticket)).to eql(ticket)
+      expect(response).to render_template(:show)
+    end
+    it 'redirects to ticket listing if ticket does not exist' do
+    end
+  end
+
+  describe 'GET edit' do
+    it 'displays filled in ticket form' do
+      game = FactoryGirl.create(:game, game_number: 666)
+      ticket = FactoryGirl.create(:ticket, games: [game])
+      get :edit, id: ticket
+      expect(assigns(:ticket)).to eql(ticket)
+      expect(response).to render_template(:edit)
+    end
+    it 'redirects to ticket listing if ticket does not exist' do
+    end
+  end
+
 end

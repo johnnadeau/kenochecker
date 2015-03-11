@@ -3,5 +3,4 @@ FactoryGirl.define do
     association :game
     association :ticket
   end
-
 end

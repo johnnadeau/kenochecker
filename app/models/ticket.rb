@@ -27,6 +27,6 @@ class Ticket < ActiveRecord::Base
   private
 
   def add_game
-    games << Game.find_by_game_number(game_number)
+    games << Game.find_by_game_number(game_number) unless games.size > 0
   end
 end

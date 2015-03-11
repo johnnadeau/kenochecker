@@ -6,6 +6,9 @@
       <td><%= number_to_currency(ticket.bet_amount) %></td>
       <td><%= ticket.bonus %></td>
       <td><%= ticket.total_prize_amount %></td>
+      <td><%= link_to "View", ticket %></td>
+      <td><%= link_to "Edit", edit_ticket_path(ticket) %></td>
     </tr>
   <% end %>
 </table>
+<%= link_to "New Ticket", new_ticket_path %>
