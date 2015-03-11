@@ -33,4 +33,12 @@ RSpec.describe Result, type: :model do
     # 3/4 pays 4 times the bet_amount 2 to equal 8 * 5 to equal 40
     expect(result.prize_amount_with_bonus).to eql(40)
   end
+
+  it 'calculates a $0 prize amount' do
+    game = FactoryGirl.build_stubbed(:game, numbers: (1..20).to_a, bonus: 1)
+    ticket = FactoryGirl.build_stubbed(:ticket, bet_amount: 2, games: [game], numbers: [21, 23, 24, 25])
+    result = FactoryGirl.build_stubbed(:result, game: game, ticket: ticket)
+    expect(result.prize_amount).to eql(0)
+  end
+
 end
