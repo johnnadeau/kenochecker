@@ -20,7 +20,8 @@ class TicketsController < ApplicationController
   
   def edit
     @ticket = Ticket.find(params[:id])
-    @ticket.game_number = @ticket.games.first.game_number
+    @ticket.starting_game_number = @ticket.games.first.game_number
+    @ticket.ending_game_number = @ticket.games.last.game_number
   end
 
   def show

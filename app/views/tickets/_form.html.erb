@@ -22,7 +22,11 @@
       value: Date.today, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.text_field :game_number, placeholder: 'Game Number',
+    <%= f.text_field :starting_game_number, placeholder: 'Starting Game Number',
+      class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :ending_game_number, placeholder: 'Ending Game Number',
       class: "form-control" %>
   </div>
   <div class="form-group">

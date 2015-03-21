@@ -18,6 +18,7 @@ gem 'uglifier'
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
+  gem 'pry'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'vcr'
