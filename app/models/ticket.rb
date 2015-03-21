@@ -14,6 +14,7 @@ class Ticket < ActiveRecord::Base
                       inclusive_array: { range: VALID_NUMBERS }
   validates :bet_amount, inclusion: { in: VALID_BET_AMOUNTS }
 
+  after_find :set_starting_and_ending_game_numbers
   before_create :add_games, if: Proc.new { |ticket| !ticket.games.any? } 
 
   def total_prize_amount
@@ -35,5 +36,10 @@ class Ticket < ActiveRecord::Base
   def game_range
     self.ending_game_number ||= starting_game_number
     (starting_game_number..ending_game_number)
+  end
+
+  def set_starting_and_ending_game_numbers
+    self.starting_game_number = games.first.game_number
+    self.ending_game_number = games.last.game_number
   end
 end
