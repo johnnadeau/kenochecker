@@ -5,6 +5,13 @@ class GamesController < ApplicationController
     @games = Game.all
   end
 
+  def search
+  end
+
+  def show
+   @game = Game.find_by_game_number(params[:game_number]) 
+  end
+
   def new
     @game = Game.new
   end
