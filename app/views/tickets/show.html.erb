@@ -2,20 +2,30 @@
   <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Ticket</h3>
+        <h3 class="panel-title">KENO</h3>
       </div>
-      <div class="panel-body">
-        <ul>
-          <li>
-          <%= label :numbers, :numbers %>
-          <%= @ticket.numbers %>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <%= pluralize(@ticket.games.size, 'Spot') %> 
+          <%= number_to_currency(@ticket.bet_amount) %> Per Draw
           </li>
-          <li>
-          <%= label :game_date, :game_date %>
-          <%= @ticket.game_date %>
+          <li class="list-group-item">
+          <%= ticket_numbers %>
+          </li>
+          <li class="list-group-item">
+          <%= @ticket.games.first.game_date %>
+          </li>
+          <li class="list-group-item">
+            <%= pluralize(@ticket.games.size, 'Draw') %>
+            Game <%= @ticket.game_range %>
+          </li>
+          <li class="list-group-item">
+            <%= multiplier %>
+          </li>
+          <li class="list-group-item">
+            <%= number_to_currency(@ticket.total_bet_amount) %>
           </li>
         </ul>
-      </div>
     </div>
   </div>
 </div>

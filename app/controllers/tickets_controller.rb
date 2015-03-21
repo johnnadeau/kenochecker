@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  include TicketsHelper
   before_action :numbers_to_array, only: [:create]
 
   def index
