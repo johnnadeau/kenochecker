@@ -17,7 +17,7 @@ class TicketsController < ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @ticket = Ticket.find(params[:id])
     @ticket.game_number = @ticket.games.first.game_number
