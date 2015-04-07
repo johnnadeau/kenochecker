@@ -4,8 +4,8 @@ class GamesController < ApplicationController
   end
 
   def search
-    @game = Game.find_by_game_number(params[:game_number])
-    render :show, @game
+    @game = Game.find_by_game_number(game_params[:game_number])
+    render :show
   end
 
   def show

@@ -16,12 +16,13 @@ gem 'turbolinks'
 gem 'uglifier'
 
 group :development, :test do
+  gem 'byebug'
   gem 'factory_girl_rails'
   gem 'guard-rspec'
-  gem 'pry'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'vcr'
+  gem 'web-console'
 end
 
 group :test do

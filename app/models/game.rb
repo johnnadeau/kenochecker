@@ -42,7 +42,7 @@ class Game < ActiveRecord::Base
           # {"draw_id"=>"1681255", "jackpot"=>"$37", "winning_num"=>"10-12-17-23-26-32-35-37-39-47-48-49-52-53-55-64-66-74-75-77", "bonus"=>"4x"}
           game = create!(game_number: game_number,
                          numbers: raw_game['winning_num'].split('-').map(&:to_i),
-                         bonus: raw_game['bonus'] == 'No Bonus' ? 1 : raw_game['bonus'].chomp('x').to_i,
+                         bonus: bonus_value(raw_game['bonus']),
                          game_date: Date.strptime(raw_game['draw_date'], '%m/%d/%Y'))
         end
     end

@@ -1,0 +1,10 @@
+<%= form_for(:game, url: search_games_path, method: :get) do |f| %>
+  <div class="form-group">
+    <%= f.label :game_number %>
+    <%= f.text_field :game_number, placeholder: 'Game Number',
+      autocomplete: "off", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Search", class: "btn" %>
+    </div>
+  <% end %>
