@@ -12,7 +12,7 @@ RSpec.describe GamesController, type: :controller do
   describe 'GET show' do
     it 'displays a game' do
       game = FactoryGirl.create(:game)
-      get :show, id: game
+      get :show, { id: game.id }
       expect(assigns(:game)).to eql(game)
       expect(response).to render_template(:show)
     end

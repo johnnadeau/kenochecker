@@ -256,6 +256,7 @@ DEPENDENCIES
   httparty
   jbuilder
   jquery-rails
+  pry
   rails (= 4.2.0)
   rspec-rails
   rubocop

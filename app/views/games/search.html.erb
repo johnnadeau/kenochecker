@@ -1,0 +1,6 @@
+<%= form_tag(game_path(1), method: "get", class: "form-inline") do %>
+  <div class="form-group">
+    <%= text_field_tag(:game_number, '', class: "form-control", placeholder: "Game Number") %>
+  </div>
+  <%= submit_tag("Show Numbers", class: "btn btn-default") %>
+<% end %>

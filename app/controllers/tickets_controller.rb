@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  include TicketsHelper
   before_action :numbers_to_array, only: [:create]
 
   def index
@@ -20,7 +21,6 @@ class TicketsController < ApplicationController
 
   def edit
     @ticket = Ticket.find(params[:id])
-    @ticket.game_number = @ticket.games.first.game_number
   end
 
   def show

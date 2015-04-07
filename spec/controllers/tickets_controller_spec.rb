@@ -24,7 +24,7 @@ RSpec.describe TicketsController do
     it 'creates a ticket and redirects to tickets listing' do
       FactoryGirl.create(:game, game_number: 666)
       post :create, ticket: { bet_amount: 5, bonus: true,
-                              numbers: '1,2,3,4,5', game_number: 666 }
+                              numbers: '1,2,3,4,5', starting_game_number: 666 }
       expect(response).to redirect_to(tickets_path)
     end
     it 'goes back to the form when there are errors' do

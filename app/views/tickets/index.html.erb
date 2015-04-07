@@ -1,14 +1,25 @@
 <h1>Tickets</h1>
-<table>
-  <% @tickets.each do |ticket| %>
+<table class="table table-bordered table-condensed">
+  <thead>
     <tr>
-      <td><%= ticket.numbers.to_s %></td>
+    <th>Numbers</th>
+    <th>Game Numbers</th>
+    <th>Bet Amount</th>
+    <th>Bonus?</th>
+    <th>Total Prize Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @tickets.each do |ticket| %>
+    <tr <%= "class=\"active\"" if ticket.total_prize_amount > 0 %>>
+      <td><%= ticket.numbers.join(', ') %></td>
+      <td><%= ticket.games.first.game_number %>..<%= ticket.games.last.game_number %></td>
       <td><%= number_to_currency(ticket.bet_amount) %></td>
       <td><%= ticket.bonus %></td>
-      <td><%= ticket.total_prize_amount %></td>
-      <td><%= link_to "View", ticket %></td>
-      <td><%= link_to "Edit", edit_ticket_path(ticket) %></td>
+      <td><%= number_to_currency(ticket.total_prize_amount) %></td>
+      <td><%= link_to 'view', ticket_path(ticket) %></td>
     </tr>
   <% end %>
+</tbody>
 </table>
 <%= link_to "New Ticket", new_ticket_path %>

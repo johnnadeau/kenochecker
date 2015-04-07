@@ -62,5 +62,13 @@ RSpec.describe Game, type: :model do
         expect(game.game_number).to eql(1682396)
       end
     end
+
+    it 'past game from api if not in the database' do
+      VCR.use_cassette("find_past_game_by_game_number") do
+        game = Game.find_by_game_number_and_game_date 1583983, Date.new(2014, 4, 1)
+        expect(game).not_to be_nil
+        expect(game.game_number).to eql(1583983)
+      end
+    end
   end
 end

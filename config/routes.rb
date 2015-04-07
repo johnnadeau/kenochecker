@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/about'
 
-  resources :games
+  resources :games do
+    collection do
+      get 'search'
+    end
+  end
   resources :tickets
 end

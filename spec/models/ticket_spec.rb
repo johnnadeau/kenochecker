@@ -64,4 +64,22 @@ RSpec.describe Ticket, type: :model do
     # game 1 has 2/4 matched numbers for 1
     expect(ticket.total_prize_amount).to eql(41)
   end
+
+  it 'can have multiple games' do
+    game = FactoryGirl.create(:game, game_number: 123, bonus: 10)
+    game_1 = FactoryGirl.create(:game, game_number: 124, bonus: 1) 
+    ticket = FactoryGirl.create(:ticket, starting_game_number: 123, ending_game_number: 124)
+                                
+    expect(ticket.games.size).to eql(2)
+    expect(ticket.games).to include(game)
+    expect(ticket.games).to include(game_1)
+  end
+
+  it 'can have a single game (just starting_game_number)' do
+    game = FactoryGirl.create(:game, game_number: 666)
+    ticket = FactoryGirl.create(:ticket, starting_game_number: 666)
+
+    expect(ticket.games.size).to eql(1)
+    expect(ticket.games).to include(game)
+  end
 end
