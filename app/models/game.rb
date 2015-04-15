@@ -11,47 +11,52 @@ class Game < ActiveRecord::Base
   validates :game_number, presence: true
   validates :game_date, presence: true
   validates :numbers, length: { is: NUMBER_COUNT },
-                      unique_array: true,
-                      inclusive_array: { range: VALID_NUMBERS }
+    unique_array: true,
+    inclusive_array: { range: VALID_NUMBERS }
   validates :bonus, inclusion: { in: VALID_BONUS_MULTIPLIERS }
 
   def self.find_by_game_number(game_number)
-    game = find_by(game_number: game_number)
-    unless game
-      raw = HTTParty.get('http://www.masslottery.com/data/json/search/dailygames/todays/keno.json',
-                         format: :json)
-      raw_game = raw['draws'].select { |d| d['draw_id'] == game_number.to_s }.first
-      if raw_game
-        game = create!(game_number: game_number,
-                       numbers: raw_game['winning_num'].split('-').map(&:to_i),
-                       bonus: bonus_value(raw_game['bonus']),
-                       game_date: Date.strptime(raw['date'], '%m/%d/%Y'))
-      end
-    end
-    game
+    find_by_game_number_and_game_date(game_number, nil)
   end
 
   def self.find_by_game_number_and_game_date(game_number, game_date)
     game = self.find_by(game_number: game_number)
     unless game
-      raw =
-        HTTParty.get("http://www.masslottery.com/data/json/search/dailygames/history/keno/#{game_date.strftime("%Y%m")}.json",
-                     format: :json)
-        raw_game = raw['draws'].select { |d| d['draw_id'] == game_number.to_s }.first
-        if raw_game
-          # {"draw_id"=>"1681255", "jackpot"=>"$37", "winning_num"=>"10-12-17-23-26-32-35-37-39-47-48-49-52-53-55-64-66-74-75-77", "bonus"=>"4x"}
-          game = create!(game_number: game_number,
-                         numbers: raw_game['winning_num'].split('-').map(&:to_i),
-                         bonus: bonus_value(raw_game['bonus']),
-                         game_date: Date.strptime(raw_game['draw_date'], '%m/%d/%Y'))
-        end
+      raw =HTTParty.get(api_url(game_date), format: :json)
+      raw_game = raw['draws'].select { |d| d['draw_id'] == game_number.to_s }.first
+      if raw_game
+        game = create_from_json(raw_game)
+      end
     end
     game
   end
-  
+
   private
 
   def self.bonus_value(raw)
-    raw == 'No Bonus' ? 1 : raw.chomp('x').to_i
+    'No Bonus' ? 1 : raw.chomp('x').to_i
+  end
+
+  def self.create_from_json(json)
+    create!(game_number: json['draw_id'],
+            numbers: json['winning_num'].split('-').map(&:to_i),
+            bonus: bonus_value(json['bonus']),
+            game_date: game_date(json))
+  end
+
+  def self.game_date(json)
+    if json.has_key? 'draw_date'
+      Date.strptime(json['draw_date'], '%m/%d/%Y')
+    else
+      Date.today
+    end
+  end
+
+  def self.api_url(date = nil)
+    if date
+      "http://www.masslottery.com/data/json/search/dailygames/history/keno/#{date.strftime("%Y%m")}.json"
+    else
+      'http://www.masslottery.com/data/json/search/dailygames/todays/keno.json'
+    end
   end
 end
