@@ -70,5 +70,12 @@ RSpec.describe Game, type: :model do
         expect(game.game_number).to eql(1583983)
       end
     end
+
+    it 'loads games for a given date' do
+      VCR.use_cassette("load_games_for_date") do
+        Game.load_for_date(Date.new(2015, 3, 1))
+        expect(Game.count).to eql(226)
+      end
+    end
   end
 end
